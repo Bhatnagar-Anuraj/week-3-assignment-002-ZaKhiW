@@ -25,35 +25,34 @@ GRADING CRITERIA:
 import maya.cmds as cmds
 import scene_functions as sf
 
-# ---------------------------------------------------------------------------
-# Scene Setup
-# ---------------------------------------------------------------------------
 cmds.file(new=True, force=True)
 
-# Create a ground plane.
 ground = cmds.polyPlane(name="ground", width=60, height=60,
                         subdivisionsX=1, subdivisionsY=1)[0]
 
-# ---------------------------------------------------------------------------
-# TODO: Build your scene below by calling functions from scene_functions.
-#
-# Example calls (uncomment and modify once your functions are implemented):
-#
-#   sf.create_building(width=5, height=10, depth=5, position=(-10, 0, 8))
-#   sf.create_tree(position=(3, 0, -5))
-#   sf.create_fence(length=12, post_count=7, position=(-6, 0, -3))
-#   sf.create_lamp_post(position=(8, 0, 2))
-#
-#   # Place 8 trees in a circle of radius 15:
-#   sf.place_in_circle(sf.create_tree, count=8, radius=15)
-#
-# Remember: call each function at least once, and aim for 15+ objects.
-# ---------------------------------------------------------------------------
+b1 = sf.create_building(width=4, height=8, depth=4, position=(0, 0, 0))
+b2 = sf.create_building(width=5, height=4, depth=7, position=(-5, 0, 15))
+b3 = sf.create_building(width=7, height=14, depth=4, position=(-10, 0, 10))
 
+park_trees = sf.place_in_circle(
+    sf.create_tree,
+    count=8,
+    radius=12,
+    center=(0, 0, 0),
+    trunk_height=3.0
+)
+ 
 
-# ---------------------------------------------------------------------------
-# Final viewport framing (do not remove).
-# ---------------------------------------------------------------------------
+t1 = sf.create_tree(position=(8, 0, -12))
+t2 = sf.create_tree(position=(-8, 0, -4))
+
+fence = sf.create_fence(length=20, post_count=8, position=(-3, 0, -9))
+
+lamp1 = sf.create_lamp_post(position=(4, 0, 3))
+lamp2 = sf.create_lamp_post(position=(11, 0, 9))
+lamp3 = sf.create_lamp_post(position=(9, 0, 2))
+lamp4 = sf.create_lamp_post(position=(2, 0, -3))
+
 if __name__ == "__main__":
     cmds.viewFit(allObjects=True)
     print("Main scene built successfully!")
